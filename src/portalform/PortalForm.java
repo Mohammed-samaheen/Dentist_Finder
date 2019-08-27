@@ -15,7 +15,7 @@ public class PortalForm {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        new Portal().setVisible(true);
+        new MainForm().setVisible(true);
     }
     
 }

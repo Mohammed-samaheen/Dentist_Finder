@@ -6,7 +6,8 @@
 package portalform;
 
 import com.form.AddressSection;
-import com.form.PersonalInformation;
+import com.form.PersonData;
+
 import java.util.ArrayList;
 
 /**
@@ -18,24 +19,31 @@ public class WidgetPreviewForm extends javax.swing.JFrame {
     /**
      * Creates new form WidgetPreviewForm
      */
-    private PersonalInformation personalInformation;
+
+    private PersonData personalData;
     private ArrayList<AddressSection> addressSectionList;
+
     public WidgetPreviewForm() {
         initComponents();
     }
 
-    public WidgetPreviewForm(PersonalInformation personalInformation, ArrayList<AddressSection> addressSectionList) {
+    // to receive data from main form
+    public WidgetPreviewForm(PersonData personalData, ArrayList<AddressSection> addressSectionList) {
         initComponents();
-        this.personalInformation = personalInformation;
+        this.personalData = personalData;
         this.addressSectionList = addressSectionList;
+
+        resitPersonalData();
+        resitAddressSection();
+
     }
     
    
     
-    private void resitPersonalInformationData(){
-        fisrtLastNameLabel.setText(personalInformation.getFirstName()+" "+personalInformation.getLastName());
-        emailPhoneLinkLabel.setText(personalInformation.getEmailAddress()+"  |  "+personalInformation.getPhoneNumber()
-                                    +"  |  "+personalInformation.getWebsite());
+    private void resitPersonalData(){
+        fisrtLastNameLabel.setText(personalData.getFirstName()+" "+personalData.getLastName());
+        emailPhoneLinkLabel.setText(personalData.getEmailAddress()+"  |  "+personalData.getPhoneNumber()
+                                    +"  |  "+personalData.getWebsite());
     }
     private void resitAddressSection(){
         String address="addriss: ";

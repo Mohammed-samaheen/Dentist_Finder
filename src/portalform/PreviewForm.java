@@ -5,12 +5,9 @@
  */
 package portalform;
 
-import com.form.AddressSection;
-import com.form.AreasOfSpecializationSection;
-import com.form.BiographySection;
-import com.form.Builder;
-import com.form.EducationSection;
-import com.form.PersonalInformation;
+import com.form.*;
+
+
 import java.util.ArrayList;
 import javax.swing.DefaultComboBoxModel;
 
@@ -23,12 +20,13 @@ public class PreviewForm extends javax.swing.JFrame {
     /**
      * Creates new form PreviewForm
      */
-    private  PersonalInformation personalInformation;
-    private  BiographySection biographySection;
+
+    private PersonData personalData;
     private  ArrayList<EducationSection> educationSectionList=new ArrayList<>();
     private  ArrayList<AddressSection> addressSectionList=new ArrayList<>();
     private  ArrayList<AreasOfSpecializationSection> areaList=new ArrayList<>();
-    private  Builder dentistFinder;
+
+    private DentistBuilder dentistBuilder;
     private EducationSection educationSection;
      
     
@@ -38,32 +36,32 @@ public class PreviewForm extends javax.swing.JFrame {
     public PreviewForm() {
         initComponents();
     }
-    public void setDentistFinder(Builder dentistFinder) {
-            this.dentistFinder = dentistFinder;
+    public void setDentistFinder(DentistBuilder dentistBuilder) {
+            this.dentistBuilder = dentistBuilder;
             resitFormeData();
         }
   
     private void resitFormeData(){
-       resitPersonalInformationData();
-       resitBiographySectionData();
+       resitPersonData();
        resitEducationSectionData();;
        resitAddressSection();
     }
-    private void resitPersonalInformationData(){
-        personalInformation=dentistFinder.getPersonalInformation();
-        firstLastNameLabel.setText(personalInformation.getFirstName()+" "+personalInformation.getLastName());
-        emailPhneLinkLabel.setText(personalInformation.getEmailAddress()+" | "+personalInformation.getPhoneNumber()
-                                    +" | "+personalInformation.getWebsite());
+    private void resitPersonData(){
+        personalData=dentistBuilder.getPersonalData();
+
+        firstLastNameLabel.setText(personalData.getFirstName()+" "+personalData.getLastName());
+        emailPhneLinkLabel.setText(personalData.getEmailAddress()+" | "+personalData.getPhoneNumber()
+                +" | "+personalData.getWebsite());
+
+        biographycountryLabel.setText(personalData.getLicenseCountryName());
+        biographyLicenseLabel.setText(personalData.getLicenseNumber());
+        biographyYearsLabel.setText(personalData.getYearInPractice()+"");
+        biographyGenderLabel.setText(personalData.getGender());
+
     }
-    private void resitBiographySectionData(){
-        biographySection=dentistFinder.getBiographySection();
-        biographycountryLabel.setText(biographySection.getLicenseCountryName());
-        biographyLicenseLabel.setText(biographySection.getLicenseNumber());
-        biographyYearsLabel.setText(biographySection.getYearInPractice()+"");
-        biographyGenderLabel.setText(biographySection.getGender());
-    }
+
     private void resitEducationSectionData(){
-        educationSectionList =dentistFinder.getEducationSectionList();
+        educationSectionList =dentistBuilder.getEducationSectionList();
         String majorList[]=new String[educationSectionList.size()];
         for(int i=0;i<majorList.length;i++)
             majorList[i]=educationSectionList.get(i).getMajor();
@@ -72,7 +70,7 @@ public class PreviewForm extends javax.swing.JFrame {
         
     }
     private void resitAddressSection(){
-        addressSectionList=dentistFinder.getAddressSectionList();
+        addressSectionList=dentistBuilder.getAddressSectionList();
         String code[]=new String[addressSectionList.size()];
         for(int i=0;i<code.length;i++)
             code[i]=addressSectionList.get(i).getPostalCode()+"";
